@@ -17,16 +17,16 @@ func resolvePath(data string) (string, []string) {
 		param = [^/]+ >mark %captureParam;
 		wildcardParam = any+ >mark %captureParam;
 
-    userHandlers = (
-				param "/profile" @{ handler = "userProfile" }
+		userHandlers = (
+			param "/profile" @{ handler = "userProfile" }
 			| param @{ handler = "user" }
     );
 
 		main := (
-				"/signup" @{ handler = "signup" }
+			"/signup" @{ handler = "signup" }
 			| "/login" @{ handler = "login" }
-      | "/user/" userHandlers
-      | "/articles/" wildcardParam @{ handler = "article" }
+			| "/user/" userHandlers
+			| "/articles/" wildcardParam @{ handler = "article" }
 			| "/js/" @{ handler = "static" } any+
 			| "/css/" @{ handler = "static" } any+
 			| "/" %eof{ handler = "home" }
